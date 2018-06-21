@@ -1,0 +1,84 @@
+<?php
+session_start();
+?>
+<DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ARPA GROCERY STORE</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="loginvalidate1.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">	
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+					<span class="sr-only"> navigation toggle</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">ARPA Grocery Store</a>
+			</div>
+		<div class="collapse navbar-collapse" id="collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="adminfinal.php"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+				<li><a href="adminfinal.php"><span class="glyphicon glyphicon-modal-window"></span>Product</a></li>
+				<li style="width:300px;left:10px;top:10px;"><input type="text" class="form-control" id="search"></li>
+				<li style="top:10px;left:20px;"><button class="btn btn-primary" id="search_btn">Search</button></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="glyphicon glyphicon-user"></span>
+					<ul class="dropdown-menu">
+						<li><a href="logout.php" style="text-decoration:none; color:blue;">Logout</a></li>
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
+	</div>
+	</div>
+	<p><br/></p>
+	<p><br/></p>
+	<p><br/></p>
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left">
+	<h2> Add Brand</h2>
+     <form action="addbrand.php" method="post" class="form-horizontal" enctype="multipart/form-data">
+      <div class="form-group">
+      <label class="control-label col-sm-3" for="title">Brand Title:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+      </div>
+	  </div>
+	  <div class="form-group">
+      <label class="control-label col-sm-3" for="price">Brand Description</label>
+      <div class="col-sm-9">
+      <input type="text" class="form-control" id="description" name="description" placeholder="Enter price">
+      </div>
+	  </div>
+	   <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <input type="Submit" value="Submit">
+      </div>
+    </div>
+	  </form>
+      </div>
+    <div class="col-sm-2 sidenav">
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+</footer>
+
+</body>
+</html>
+
+

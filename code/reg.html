@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <title>ARPA Grocery Store</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<script src="js/jquery2.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<style>
+  .info, .error {
+	
+padding: 0px 2px;
+   
+}
+    
+
+.info {
+	
+     color:blue;
+     
+     
+}
+
+
+     .error {
+	
+      color:red;
+     
+}
+
+  </style>
+<script>
+$(document).ready(function () {
+$("#register").click(function(event){
+event.preventDefault();
+$("#username").after("<span id='user_focus'> Enter only alphabetical and numerical characters </span>");
+$("#username").after("<span id='user_error'> <i>Error.Username can contain only alphabetical and numerical characters</i> </span>");
+$("#username").after("<span id='user_empty'> <i>Please provide the username</i> </span>");
+$("#password").after("<span id='pass_focus'> <i>The password field should be at least 8 characters long</i> </span>");
+$("#password").after("<span id='pass_error'> <i>Error.Enter a valid password</i> </span>");
+$("#password").after("<span id='pass_ok'> <i>ok</i> </span>");
+$("#password").after("<span id='pass_empty'> <i>Please provide the password</i> </span>");
+$("#email").after("<span id='email_focus'> <i>email address should be in the form abc@gma.com</i> </span>");
+$("#email").after("<span id='email_error'> <i>Error.enter valid email address</i> </span>");
+$("#email").after("<span id='email_empty'> <i>Please provide email address</i> </span>");
+$("span").hide();  
+var username=$("#username").val();
+var email_format =/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+var password=$("#password").val();
+var cpassword=$("#cpassword").val();
+var email=$("#email").val();
+var User_name_format = /^[A-Za-z0-9]+$/;
+var firstname=$("#firstname").val();
+var lastname=$("#lastname").val();
+if(username=="" || password=="" || email=="" || firstname=="" || (!User_name_format.test(username)) || (password.length<8) || (!email_format.test(email)) || (password!=cpassword))
+{
+       if( username== ""){
+	  
+	    $("#user_empty").show().addClass('error');
+                
+        } 
+      
+       else if (!User_name_format.test(username)) {       
+           $("#user_error").show().addClass('error');
+        } 
+      else{
+       
+        $.ajax({
+  url: "checkuser.php",
+  type: "GET",
+  data: {username:username},
+  success:function(data){
+    $("#uname_availability").html(data);	
+  }
+});
+        }    
+   
+        if( password== ""){
+		 
+		 $("#pass_empty").show().addClass('error');
+                 
+         } 
+		 
+         else if (password.length<8) {  
+
+            
+           $("#pass_error").show().addClass('error');
+        } 
+       else{
+		 $("#pass_ok").show().addClass('ok');
+        }
+         if(cpassword!=password)
+		 {
+		 $("#cpassword").after("<span class='error'>Passwords doesn't match</span>");
+		 }
+		 if(firstname=="")
+		 {
+		 
+		 $("#firstname").after("<span class='error'>Please provide first name</span>");
+		 }
+       if( email== ""){
+          $("#email_empty").show().addClass('error');      
+        }   
+     else if (!email_format.test(email)) {    
+              
+           $("#email_error").show().addClass('error');
+        } 
+     
+      else{
+	  $.ajax({
+      url: "checkemail.php",
+      type: "GET",
+      data: {email:email},
+      success:function(data){
+      $("#email_availability").html(data);	
+  }
+});
+        
+        }
+}
+else
+{
+var username=$("#username").val();
+var password=$("#password").val();
+var email=$("#email").val();
+var first_name=$("#firstname").val();
+var last_name=$("#lastname").val();
+$.ajax({
+  url: "insertdata.php",
+  type: "GET",
+  data: {username:username,firstname:first_name,lastname:last_name,email:email,password:password},
+  success:function(data){
+  if(data=="Registered successfully")
+  { 
+    $("#name_availability").html(data);
+  }
+  }
+});
+}
+});
+});
+</script>
+ </head>
+ <body>
+ <body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">	
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+					<span class="sr-only">navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">ARPA Grocery Store</a>
+			</div>
+		<div class="collapse navbar-collapse" id="collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="index.php"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+				<li><a href="index.php"><span class="glyphicon glyphicon-modal-window"></span>Product</a></li>
+				</ul>
+				</div>
+				</div>
+				</div>
+				<p><br/></p>
+				<p><br/></p>
+				<p><br/></p>
+				<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left">
+  <h2>Sign in</h2>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="username">Username:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+		<div id="uname_availability" class ="error"></div>
+      </div>
+    </div>
+	<div class="form-group">
+      <label class="control-label col-sm-3" for="firstname">firstname:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter firstname">
+      </div>
+    </div>
+	<div class="form-group">
+      <label class="control-label col-sm-3" for="lastname">Lastname:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter lastname">
+      </div>
+    </div>
+	<div class="form-group">
+      <label class="control-label col-sm-3" for="email">email:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="email" name="email" placeholder="Enter email">
+		<div id="email_availability" class="error"></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="password">Password:</label>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" id="password" placeholder="Enter password">
+      </div>
+    </div>
+	<div class="form-group">
+      <label class="control-label col-sm-3" for="password">Confirm Password:</label>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" id="cpassword" placeholder="Confirm password">
+      </div>
+    </div>
+	<div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <button type="submit" id="register" class="btn btn-default">Submit</button>
+		<div id="name_availability"></div>
+      </div>
+    </div>
+
+    
+  </form>
+    </div>
+    <div class="col-sm-2 sidenav">
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+</footer>
+
+</body>
+</html>
+
+								
