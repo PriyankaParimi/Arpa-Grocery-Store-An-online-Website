@@ -1,0 +1,1 @@
+This folder has CSS files required for the project
