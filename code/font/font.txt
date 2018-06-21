@@ -1,0 +1,1 @@
+This fodler has all the files related to text styling.
