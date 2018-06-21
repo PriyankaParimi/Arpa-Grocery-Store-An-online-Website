@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="loginvalidate1.js"></script>
+<style>
+  .info, .error {
+	padding: 0px 2px;
+   }
+   .info {
+    color:blue;
+   }
+   .error {
+	color:red;
+   }
+</style>
+</head>
+<body>
+<form action="login1.php" method="post" onsubmit="validate()">
+<h1><center>Login</center></h1>
+<p>Username:<input type="text" name="username" id="username"/></p>
+<p>Password:<input type="password" name="password" id="pwd"/></p>
+<p><input type="submit" value="Submit"/></p>
+</form>
+</body>
+</html>
